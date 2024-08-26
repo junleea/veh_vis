@@ -46,50 +46,40 @@ def getTracks(car_name):
             #时间通过时间CI_ThroughTime之差在10分钟以上的连接线不显示
             s.add(row['CI_AddressId'])
             tracks.append(row['CI_AddressId'])
-    return tracks
+    return list1
 
 def getNode():
-    sql="select CI_AddressId,count(CI_AddressId) as num from zakk_carinfo_202310 group by CI_AddressId order by num desc ;"
+    sql="select CI_AddressId,count(CI_AddressId) as num from zakk_carinfo_202310 where  CI_ThroughTime < '2023-10-01 23:59:59' and CI_ThroughTime > '2023-10-01 00:00:00'  group by CI_AddressId order by num desc ;"
     nodes=[]
     list1 = get_info_mysql(sql)
     for row in list1:
         nodes.append({"id":row['CI_AddressId'],"value":row['num']})
     return nodes
 
-if __name__ == "__main__":
-    cars=getCars()
-    print(cars)
-    links={}
+
+def getLinks(cars):
+    links = []
     for car in cars:
-        print(car)
         tracks = getTracks(car)
         for i in range(1,len(tracks)):
-            ss={}
-            try:
-                ss = links[tracks[i-1]]
-            except:
-                links[tracks[i-1]]=set()
-                ss=set()
-            if ss==None :
-                ss=set()
-                ss.add(tracks[i])
-                links[tracks[i-1]]=ss
+            if tracks[i]["CI_AddressId"] == tracks[i-1]["CI_AddressId"]:
                 continue
-            if tracks[i] not in ss:
-                ss.add(tracks[i])
-            links[tracks[i-1]]=ss
+            links.append({"source":tracks[i-1]["CI_AddressId"],"target":tracks[i]["CI_AddressId"],"time":(tracks[i]["CI_ThroughTime"]-tracks[i-1]["CI_ThroughTime"]).seconds})
+        break
+    links2 = []
+    for link in links:
+        if link["time"] < 300:
+            links2.append({"source":link["source"],"target":link["target"]})
+    print("len1, len2=",len(links),len(links2))
     with open('links.json','w') as f:
         f.write(str(links))
-
-    links2=[]
-    
-    for link in links.keys():
-        ss = links[link]
-        for s in ss:
-            links2.append({"source":link,"target":s})
-
-    print("links2:",len(links2))
     with open('links2.json','w') as f:
         f.write(str(links2))
+    
+if __name__ == "__main__":
+    cars=getCars()
+    getLinks(cars)
+    #print(getNode())
+
 
 
