@@ -1,4 +1,5 @@
 import pymysql
+import datetime
 conn = pymysql.connect(
             host="www.ylxteach.net",
             port=3366,
@@ -75,11 +76,52 @@ def getLinks(cars):
         f.write(str(links))
     with open('links2.json','w') as f:
         f.write(str(links2))
-    
+
+def getNodesCount():
+    sql="select CI_AddressId as name,count(CI_AddressId) as value from zakk_carinfo_202310 group by CI_AddressId order by value desc ;"
+    list1 = get_info_mysql(sql)
+    return list1
+
+def getCountByMonth():
+    #获取每月的车辆数量
+    sql="select month(CI_ThroughTime) as month,count(CI_CarPlate) as num from zakk_carinfo_202310 group by month(CI_ThroughTime) order by month(CI_ThroughTime);"
+    list1 = get_info_mysql(sql)
+    return list1
+
+def getCountByWeek():
+    #获取每周的车辆数量
+    sql="select week(CI_ThroughTime) as week,count(CI_CarPlate) as num from zakk_carinfo_202310 group by week(CI_ThroughTime) order by week(CI_ThroughTime);"
+    list1 = get_info_mysql(sql)
+    return list1
+
+def getCountByDay():
+    #获取每天的车辆数量
+    sql="select date(CI_ThroughTime) as day,count(CI_CarPlate) as num from zakk_carinfo_202310 group by date(CI_ThroughTime) order by date(CI_ThroughTime);"
+    list1 = get_info_mysql(sql)
+    return list1
 if __name__ == "__main__":
-    cars=getCars()
-    getLinks(cars)
+    # cars=getCars()
+    # getLinks(cars)
     #print(getNode())
+    # end =getNodesCount()
+    # print(end)
+    # for row in end:
+    #     print(row)
+    #print(getCountByMonth())
+    print(getCountByWeek())
+    data = getCountByDay()
+    end=[]
+    e=[]
+    time1 = datetime.datetime.strptime("2023-09-30 00:00:00", "%Y-%m-%d %H:%M:%S").date()
+    time2 = datetime.datetime.strptime("2023-10-13 00:00:00", "%Y-%m-%d %H:%M:%S").date()
+    i=1
+    for row in data:
+        if row["day"] > time1 and row["day"] < time2:
+            e.append(str(i))
+            i+=1
+            end.append({"count":row["num"]}) 
+    print(e)
+    print(end)
 
 
 
