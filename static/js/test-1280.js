@@ -283,7 +283,8 @@ function init_myChart3(data) {
 }
 function init_myChart2() {
     var data = {
-        "uploadData": [{'count': 182422}, {'count': 284095}, {'count': 276143}, {'count': 259870}, {'count': 243112}, {'count': 233564}, {'count': 185010}, {'count': 191391}, {'count': 241219}, {'count': 237444}, {'count': 208651}, {'count': 168117}],        "updateData": [{ "count": 310 }, { "count": 281 }, { "count": 123 }, { "count": 97 }, { "count": 323 }, { "count": 373 }
+        "uploadData": [{'count': 182422}, {'count': 284095}, {'count': 276143}, {'count': 259870}, {'count': 243112}, {'count': 233564}, {'count': 185010}, {'count': 191391}, {'count': 241219}, {'count': 237444}, {'count': 208651}, {'count': 168117}],    
+        "updateData": [{ "count": 310 }, { "count": 281 }, { "count": 123 }, { "count": 97 }, { "count": 323 }, { "count": 373 }
             , { "count": 423 }, { "count": 451 }, { "count": 501 }, { "count": 452 }, { "count": 201 }, { "count": 177 }],
         "viewData": [{ "count": 1651 }, { "count": 1842 }, { "count": 2223 }, { "count": 2123 }, { "count": 2021 }, { "count": 1812 }
             , { "count": 1928 }, { "count": 2019 }, { "count": 2613 }, { "count": 2754 }, { "count": 2981 }, { "count": 3001 }]
@@ -340,7 +341,7 @@ function init_myChart2() {
             itemGap: 10,
             top: '16',
             right: '10',
-            data: ['数据总量', '共享次数', '更新量'],
+            data: ['数据总量'],
             textStyle: {
                 fontSize: 14,
                 color: '#a0a8b9'
@@ -424,64 +425,6 @@ function init_myChart2() {
                 }
             },
             data: uploadCnt
-        }, {
-            name: '共享次数',
-            type: 'line',
-            smooth: true,
-            showSymbol: false,
-            lineStyle: {
-                normal: {
-                    width: 2
-                }
-            },
-            areaStyle: {
-                normal: {
-                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                        offset: 0,
-                        color: 'rgba(219, 50, 51, 0.3)'
-                    }, {
-                        offset: 0.8,
-                        color: 'rgba(219, 50, 51, 0)'
-                    }], false),
-                    shadowColor: 'rgba(0, 0, 0, 0.1)',
-                    shadowBlur: 10
-                }
-            },
-            itemStyle: {
-                normal: {
-                    color: '#eb5690'
-                }
-            },
-            data: viewCnt
-        }, {
-            name: '更新量',
-            type: 'line',
-            smooth: true,
-            showSymbol: false,
-            lineStyle: {
-                normal: {
-                    width: 2
-                }
-            },
-            areaStyle: {
-                normal: {
-                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                        offset: 0,
-                        color: 'rgba(0, 136, 212, 0.3)'
-                    }, {
-                        offset: 0.8,
-                        color: 'rgba(0, 136, 212, 0)'
-                    }], false),
-                    shadowColor: 'rgba(0, 0, 0, 0.1)',
-                    shadowBlur: 10
-                }
-            },
-            itemStyle: {
-                normal: {
-                    color: '#43bbfb'
-                }
-            },
-            data: updateCnt
         }
         ]
     };
