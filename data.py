@@ -58,6 +58,13 @@ def getNode():
     return nodes
 
 
+def getCarPlateData(node):
+    sql="select CI_CarPlate,CI_AddressId,CI_ThroughTime from zakk_carinfo_202310 where  CI_ThroughTime < '2023-10-01 23:59:59' and CI_ThroughTime > '2023-10-01 00:00:00' and CI_AddressId="+str(node)+" order by CI_ThroughTime;"
+    tracks=[]
+    list1 = get_info_mysql(sql)
+    for row in list1:
+        tracks.append({"id":row['CI_CarPlate'],"time":row['CI_ThroughTime']})
+    return tracks
 
 
 def getLinksCars():

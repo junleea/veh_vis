@@ -94,12 +94,51 @@ def getCountByWeek():
     list1 = get_info_mysql(sql)
     return list1
 
+def getCarPlateData(node):
+    #车牌首字母
+    sql = "select left(CI_CarPlate,1) as name,count(CI_CarPlate) as value from zakk_carinfo_202310 where CI_AddressId='XZP' group by left(CI_CarPlate,1) order by value desc;"
+    list1 = get_info_mysql(sql)
+    return list1
+
+
+def getCarPlateByDay(node,date):
+    #获取某天某节点的车��数量
+    sql="select CI_CarPlate as name,count(CI_CarPlate) as value from zakk_carinfo_202310 where CI_AddressId="+str(node)+" and date(CI_ThroughTime)="+str(date)+" group by CI_CarPlate order by value desc;"
+    list1 = get_info_mysql(sql)
+    return list1
+
+def getCarThroughTimeLatest():
+
+    sql ="select distinct CI_CarPlate,CI_AddressId,CI_ThroughTime from zakk_carinfo_202310 order by CI_ThroughTime limit 50;"
+    list1 = get_info_mysql(sql)
+    return list1
+
+
+def getPlateByDay():
+    sql="SELECT DATE(CI_ThroughTime) AS day,LEFT(CI_CarPlate, 1) AS name,COUNT(*) AS num FROM zakk_carinfo_202310 GROUP BY DATE(CI_ThroughTime),LEFT(CI_CarPlate, 1) ORDER BY day,num DESC;"
+    list1 = get_info_mysql(sql)
+    return list1
+
+
+def getAddressByDay():
+    sql="select Date(zakk_carinfo_202310.CI_ThroughTime) as day,zakk_carinfo_202310.CI_AddressId,count(zakk_carinfo_202310.CI_AddressId) as num from zakk_carinfo_202310 where CI_ThroughTime > '2023-10-01' group by day,CI_AddressId  order by day,num desc;"
+    list1 = get_info_mysql(sql)
+    return list1
+
 def getCountByDay():
     #获取每天的车辆数量
     sql="select date(CI_ThroughTime) as day,count(CI_CarPlate) as num from zakk_carinfo_202310 group by date(CI_ThroughTime) order by date(CI_ThroughTime);"
     list1 = get_info_mysql(sql)
     return list1
+
+
+def getAddressAllCount():
+    sql="select zakk_carinfo_202310.CI_AddressId as areaName,count(zakk_carinfo_202310.CI_AddressId) as count from zakk_carinfo_202310 group by CI_AddressId order by count desc;"
+    list1 = get_info_mysql(sql)
+    print(list1)
+
 if __name__ == "__main__":
+    getAddressAllCount()
     # cars=getCars()
     # getLinks(cars)
     #print(getNode())
@@ -108,20 +147,55 @@ if __name__ == "__main__":
     # for row in end:
     #     print(row)
     #print(getCountByMonth())
-    print(getCountByWeek())
-    data = getCountByDay()
-    end=[]
-    e=[]
-    time1 = datetime.datetime.strptime("2023-09-30 00:00:00", "%Y-%m-%d %H:%M:%S").date()
-    time2 = datetime.datetime.strptime("2023-10-13 00:00:00", "%Y-%m-%d %H:%M:%S").date()
-    i=1
-    for row in data:
-        if row["day"] > time1 and row["day"] < time2:
-            e.append(str(i))
-            i+=1
-            end.append({"count":row["num"]}) 
-    print(e)
-    print(end)
+    # print(getCountByWeek())
+    # data = getCountByDay()
+    # end=[]
+    # e=[]
+    # time1 = datetime.datetime.strptime("2023-09-30 00:00:00", "%Y-%m-%d %H:%M:%S").date()
+    # time2 = datetime.datetime.strptime("2023-10-13 00:00:00", "%Y-%m-%d %H:%M:%S").date()
+    # i=1
+    # for row in data:
+    #     if row["day"] > time1 and row["day"] < time2:
+    #         e.append(str(i))
+    #         i+=1
+    #         end.append({"count":row["num"]}) 
+    # print(e)
+    # print(end)
+    l= getCarPlateData('XZP')
+    x=[]
+    y=[]
+
+    i=0
+    for l1 in l :
+        i+=1
+        x.append(l1["name"])
+        y.append(l1["value"])
+        if i>20:
+            break
+    print(x)
+    print(y)
+
+    # ll=getCarThroughTimeLatest()
+    # for l2 in ll:
+    #     e="<li>"+"<div>"+l2["CI_CarPlate"]+"</div>"+"<div>"+l2["CI_AddressId"]+"</div>"+"<div>"+str(l2["CI_ThroughTime"])+"</div>" +"</li>"
+    #     print(e)
+    
+    j=[]
+    xZP=[]
+    qJZLCHDD=[]
+    res = getAddressByDay()
+    for row in res:
+        if row["CI_AddressId"] == "XZP":
+            xZP.append({"count":row["num"]})
+        if row["CI_AddressId"] == "QJZLCHDD":
+            qJZLCHDD.append({"count":row["num"]})
+        if row["CI_AddressId"] == "JHNC":
+            j.append({"count":row["num"]})
+    
+    print(j)
+    print(xZP)
+    print(qJZLCHDD)
+
 
 
 

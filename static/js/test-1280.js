@@ -1,12 +1,9 @@
 /****** PLACE YOUR CUSTOM STYLES HERE ******/
 
 var legal_person_data = {
-    "uploadData": [{ "count": 630 }, { "count": 986 }, { "count": 792 }, { "count": 642 }, { "count": 521 }, { "count": 573 }
-        , { "count": 832 }, { "count": 747 }, { "count": 983 }, { "count": 836 }, { "count": 831 }, { "count": 633 }],
-    "updateData": [{ "count": 110 }, { "count": 181 }, { "count": 123 }, { "count": 197 }, { "count": 123 }, { "count": 173 }
-        , { "count": 123 }, { "count": 151 }, { "count": 101 }, { "count": 152 }, { "count": 101 }, { "count": 177 }],
-    "viewData": [{ "count": 651 }, { "count": 842 }, { "count": 223 }, { "count": 223 }, { "count": 221 }, { "count": 812 }
-        , { "count": 928 }, { "count": 219 }, { "count": 613 }, { "count": 254 }, { "count": 981 }, { "count": 301 }]
+    "uploadData": [{'count': 33301}, {'count': 32435}, {'count': 31883}, {'count': 30860}, {'count': 27544}, {'count': 28122}, {'count': 40911}, {'count': 40031}, {'count': 34869}, {'count': 38497}, {'count': 33255}, {'count': 21885}],
+    "updateData": [{'count': 26363}, {'count': 26417}, {'count': 26692}, {'count': 24496}, {'count': 22709}, {'count': 21760}, {'count': 20999}, {'count': 21250}, {'count': 21722}, {'count': 20827}, {'count': 20801}, {'count': 13482}],
+    "viewData": [{'count': 22241}, {'count': 22325}, {'count': 21925}, {'count': 21418}, {'count': 18866}, {'count': 20752}, {'count': 23701}, {'count': 16049}, {'count': 20659}, {'count': 22825}, {'count': 22484}, {'count': 13160}]
 };
 var people_data = {
     "uploadData": [{ "count": 1300 }, { "count": 1686 }, { "count": 1692 }, { "count": 1742 }, { "count": 1621 }, { "count": 773 }
@@ -624,9 +621,8 @@ function init_myChart5() {
 
 function init_myChart6() {
     var data = {
-        "uploadData": [{ "count": 5421, "areaName": "公共服务" }, { "count": 6512, "areaName": "健康保障" }, { "count": 3721, "areaName": "安全生产" }, { "count": 2842, "areaName": "价格监督" }
-            , { "count": 6427, "areaName": "能源安全" }, { "count": 4422, "areaName": "信用体系" }, { "count": 1020, "areaName": "城乡建设" }, { "count": 1421, "areaName": "社区治理" }, { "count": 1776, "areaName": "生态环保" }
-            , { "count": 2428, "areaName": "应急维稳" }]
+        "uploadData":"uploadData": [{'areaName': 'JHNC', 'count': 393600}, {'areaName': 'XZP', 'count': 267521}, {'areaName': 'QJZLCHDD', 'count': 246422}, {'areaName': 'QJLK', 'count': 217345}, {'areaName': 'JNLK', 'count': 150188}, {'areaName': 'LYQ', 'count': 135564}, {'areaName': 'SZP', 'count': 133112}, {'areaName': 'ZHDD', 'count': 132915}, {'areaName': 'HYZT', 'count': 128245}, {'areaName': 'JYHC', 'count': 116016}, {'areaName': 'DYZX', 'count': 109242}, {'areaName': 'HYJS', 'count': 107856}, {'areaName': 'TPZT', 'count': 104845}, {'areaName': 'TPHC', 'count': 103003}, {'areaName': 'DZP', 'count': 71353}, {'areaName': 'YJQ', 'count': 69957}, {'areaName': 'PLWXLRXR', 'count': 32056}, {'areaName': 'BJZT', 'count': 14619}, {'areaName': 'BJQJ', 'count': 10647}, {'areaName': 'SHUXIYILU', 'count': 
+            1759}]
     };
     var uploadCnt = [];
     var updateCnt = [];
@@ -693,7 +689,7 @@ function init_myChart6() {
                 color: '#fff',
                 fontSize: 14
             },
-            "data": ['资源总量'],
+            "data": ['总量'],
 
         },
         "calculable": true,
