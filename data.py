@@ -1,5 +1,6 @@
 import pymysql
 import datetime
+
 conn = pymysql.connect(
             host="www.ylxteach.net",
             port=3366,
@@ -93,6 +94,7 @@ def getLinksCars():
 
     with open('links_line_car_number.json','w') as f:
         f.write(str(ends))
+    return ends
 
 
 if __name__ == "__main__":

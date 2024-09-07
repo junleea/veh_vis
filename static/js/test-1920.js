@@ -17,7 +17,7 @@ var picture_data = {
     "uploadData": [{ "count": 330 }, { "count": 786 }, { "count": 492 }, { "count": 842 }, { "count": 421 }, { "count": 673 }
         , { "count": 932 }, { "count": 447 }, { "count": 583 }, { "count": 436 }, { "count": 331 }, { "count": 433 }],
     "updateData": [{ "count": 10 }, { "count": 81 }, { "count": 23 }, { "count": 97 }, { "count": 23 }, { "count": 73 }
-        , { "count": 23 }, { "count": 51 }, { "count": 1 }, { "count": 52 }, { "count":01 }, { "count": 77 }],
+        , { "count": 23 }, { "count": 51 }, { "count": 1 }, { "count": 52 }, { "count":1 }, { "count": 77 }],
     "viewData": [{ "count": 451 }, { "count": 342 }, { "count": 523 }, { "count": 323 }, { "count": 421 }, { "count": 812 }
         , { "count": 728 }, { "count": 619 }, { "count": 613 }, { "count": 554 }, { "count": 481 }, { "count": 301 }]
 };

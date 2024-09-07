@@ -9,6 +9,8 @@ from werkzeug.utils import secure_filename
 from gevent import pywsgi
 from mongo import *
 
+import data as data_d
+
 app = Flask(__name__,static_folder='./static/assets',template_folder = "./static")
 CORS(app)  # 处理跨域请求
 
@@ -39,6 +41,10 @@ def get_info_mysql(sql):
         cursor.close()
     return result
 
+def getLinks(begin,end):
+    sql = "SELECT * FROM zakk_carinfo_202310 WHERE  CI_ThroughTime < '"+end+"' and CI_ThroughTime > '"+begin+"' and CI_AddressId in (SELECT CI_AddressId FROM zakk_carinfo_202310 WHERE  CI_ThroughTime < '"+end+"' and CI_ThroughTime > '"+begin+"' group by CI_AddressId having count(CI_AddressId) > 1) order by CI_ThroughTime;"
+    return get_info_mysql(sql)
+
 
 @app.route("/node_data", methods=["GET","POST"])
 def getNodeData():
@@ -56,7 +62,12 @@ def getNodeData():
         list1 = get_info_mysql(sql)
         for row in list1:
             nodes.append({"id":row['CI_AddressId'],"value":row['num']})
-        return {"nodes":nodes}
+        links_ = data_d.getLinksCars()
+        links = []
+        for l in links_:
+            links.append(links_[l])
+        print("links:",links)
+        return {"nodes":nodes,"links":links}
     except:
         return "false"
 
