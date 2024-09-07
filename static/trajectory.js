@@ -4,6 +4,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const height = parseInt(svg.style("height"));
     const startTimePicker = document.getElementById("startTime");
     const endTimePicker = document.getElementById("endTime");
+    startTimePicker.value = "2023-10-01T15:00";
+    endTimePicker.value = "2023-10-01T16:00";
     const licensePlatesInput = document.getElementById("licensePlates");
     const queryTrajectoriesButton = document.getElementById("queryTrajectories");
     const goHomeButton = document.getElementById("goHome");
@@ -12,6 +14,9 @@ document.addEventListener("DOMContentLoaded", function () {
         nodes: [{'id': 'JHNC', 'value': 33301}, {'id': 'XZP', 'value': 26363}, {'id': 'QJZLCHDD', 'value': 22241}, {'id': 'QJLK', 'value': 20928}, {'id': '', 'value': 15538}, {'id': 'SZP', 'value': 13745}, {'id': 'HYZT', 'value': 9585}, {'id': 'ZHDD', 'value': 9429}, {'id': 'DYZX', 'value': 7060}, {'id': 'JNLK', 'value': 4163}, {'id': 'TPHC', 'value': 3856}, {'id': 'LYQ', 'value': 3379}, {'id': 'JYHC', 'value': 3129}, {'id': 'HYJS', 'value': 2611}, {'id': 'TPZT', 'value': 2551}, {'id': 'YJQ', 'value': 2103}, {'id': 'DZP', 'value': 1995}, {'id': 'BJZT', 'value': 202}, {'id': 'BJQJ', 'value': 150}, {'id': 'SHUXIYILU', 'value': 92}],
         links: [{'source': 'ZHDD', 'target': 'HYZT'}, {'source': 'ZHDD', 'target': 'LYQ'}, {'source': 'DZP', 'target': 'XZP'}, {'source': 'JYHC', 'target': 'TPHC'}, {'source': 'TPHC', 'target': 'DYZX'}, {'source': 'DZP', 'target': 'QJZLCHDD'}, {'source': 'HYZT', 'target': 'DYZX'}, {'source': 'SZP', 'target': 'JNLK'}, {'source': 'QJLK', 'target': 'JYHC'}, {'source': 'SZP', 'target': 'JNLK'}, {'source': 'SZP', 'target': 'DZP'}, {'source': 'JNLK', 'target': 'XZP'}, {'source': 'JNLK', 'target': 'QJLK'}, {'source': 'JYHC', 'target': 'XZP'}, {'source': 'SZP', 'target': 'JYHC'}, {'source': 'SZP', 'target': 'JYHC'}, {'source': 'XZP', 'target': 'JHNC'}, {'source': 'XZP', 'target': 'LYQ'}, {'source': 'HYJS', 'target': 'HYZT'}, {'source': 'JHNC', 'target': 'XZP'}, {'source': 'BJQJ', 'target': 'XZP'}, {'source': 'JHNC', 'target': 'XZP'}, {'source': 'HYZT', 'target': 'TPZT'}, {'source': 'XZP', 'target': 'JHNC'}, {'source': 'JNLK', 'target': 'SZP'}, {'source': 'HYZT', 'target': 'JYHC'}, {'source': 'JHNC', 'target': ''}, {'source': 'HYZT', 'target': 'JHNC'}, {'source': 'SZP', 'target': 'JYHC'}, {'source': 'QJLK', 'target': 'HYJS'}, {'source': 'DZP', 'target': 'XZP'}, {'source': 'HYZT', 'target': 'TPZT'}, {'source': 'JHNC', 'target': 'HYJS'}, {'source': 'XZP', 'target': 'LYQ'}, {'source': 'JNLK', 'target': 'ZHDD'}, {'source': 'ZHDD', 'target': 'HYZT'}, {'source': 'JHNC', 'target': 'XZP'}, {'source': 'HYJS', 'target': 'QJZLCHDD'}, {'source': 'TPHC', 'target': 'XZP'}, {'source': 'LYQ', 'target': 'TPZT'}, {'source': 'JYHC', 'target': 'LYQ'}, {'source': 'LYQ', 'target': 'JYHC'}, {'source': 'XZP', 'target': 'JYHC'}, {'source': 'DZP', 'target': 'QJLK'}, {'source': 'JNLK', 'target': 'JHNC'}, {'source': 'TPZT', 'target': 'HYZT'}, {'source': 'LYQ', 'target': 'SZP'}, {'source': 'DZP', 'target': 'QJZLCHDD'}, {'source': 'SZP', 'target': 'JYHC'}, {'source': 'DZP', 'target': 'XZP'}, {'source': 'BJQJ', 'target': 'LYQ'}, {'source': 'JNLK', 'target': 'XZP'}, {'source': 'XZP', 'target': 'JNLK'}, {'source': 'JYHC', 'target': 'LYQ'}, {'source': 'LYQ', 'target': 'SZP'}, {'source': 'TPZT', 'target': 'HYJS'}, {'source': 'XZP', 'target': 'JNLK'}, {'source': 'SZP', 'target': 'LYQ'}, {'source': 'LYQ', 'target': 'HYZT'}, {'source': 'TPHC', 'target': 'QJZLCHDD'}, {'source': 'JNLK', 'target': 'SZP'}, {'source': 'LYQ', 'target': 'XZP'}, {'source': 'JYHC', 'target': 'QJLK'}, {'source': 'QJZLCHDD', 'target': 'HYJS'}, {'source': 'DZP', 'target': 'QJLK'}, {'source': 'QJLK', 'target': 'HYJS'}, {'source': 'HYJS', 'target': 'TPZT'}, {'source': 'SZP', 'target': 'LYQ'}, {'source': 'LYQ', 'target': 'XZP'}, {'source': 'ZHDD', 'target': 'HYJS'}, {'source': 'ZHDD', 'target': 'QJLK'}, {'source': 'TPZT', 'target': 'HYJS'}, {'source': 'SZP', 'target': 'JNLK'}, {'source': 'LYQ', 'target': 'SZP'}, {'source': 'LYQ', 'target': 'HYZT'}, {'source': 'QJLK', 'target': 'JNLK'}, {'source': 'TPZT', 'target': 'LYQ'}, {'source': 'JHNC', 'target': ''}, {'source': 'BJQJ', 'target': 'LYQ'}, {'source': 'XZP', 'target': 'JYHC'}, {'source': 'HYJS', 'target': 'TPHC'}, {'source': 'QJZLCHDD', 'target': 'HYJS'}, {'source': 'BJZT', 'target': 'XZP'}, {'source': 'JNLK', 'target': 'QJLK'}, {'source': 'LYQ', 'target': 'DYZX'}, {'source': 'QJLK', 'target': 'DZP'}, {'source': 'XZP', 'target': 'JNLK'}, {'source': 'JNLK', 'target': 'XZP'}, {'source': 'LYQ', 'target': 'SZP'}, {'source': 'QJLK', 'target': 'DYZX'}, {'source': 'LYQ', 'target': 'XZP'}, {'source': 'SZP', 'target': 'JYHC'}, {'source': 'LYQ', 'target': 'SZP'}, {'source': 'LYQ', 'target': 'DYZX'}, {'source': 'TPZT', 'target': 'HYJS'}, {'source': 'HYJS', 'target': 'ZHDD'}, {'source': 'HYJS', 'target': 'QJLK'}, {'source': 'JYHC', 'target': 'TPHC'}, {'source': 'HYJS', 'target': 'BJQJ'}, {'source': 'LYQ', 'target': 'ZHDD'}, {'source': 'QJZLCHDD', 'target': 'TPZT'}, {'source': 'JNLK', 'target': 'XZP'}, {'source': 'XZP', 'target': 'JYHC'}, {'source': 'QJLK', 'target': 'TPZT'}, {'source': 'SZP', 'target': 'JNLK'}, {'source': 'JYHC', 'target': 'XZP'}, {'source': 'HYJS', 'target': 'TPZT'}, {'source': 'ZHDD', 'target': 'HYZT'}, {'source': 'XZP', 'target': 'DZP'}, {'source': 'DZP', 'target': 'QJLK'}, {'source': 'JNLK', 'target': 'XZP'},{'source': 'YJQ', 'target': 'SZP'}]
     };
+
+    const paths = [];
+    const labels = [];
 
     svg.append("defs").append("marker")
         .attr("id", "arrow")
@@ -64,6 +69,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
         node
             .attr("transform", d => `translate(${d.x},${d.y})`);
+         paths.forEach(({ path, source, target }) => {
+            path.attr("x1", source.x)
+                .attr("y1", source.y)
+                .attr("x2", target.x)
+                .attr("y2", target.y);
+        });
+
+        labels.forEach(({ label, source, target }) => {
+            label.attr("x", (source.x + target.x) / 2)
+                .attr("y", (source.y + target.y) / 2);
+        });
     });
 
     function dragstarted(event, d) {
@@ -84,14 +100,15 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     queryTrajectoriesButton.addEventListener("click", function () {
-        const startTimeValue = startTimePicker.value;
-        const endTimeValue = endTimePicker.value;
-        const licensePlates = licensePlatesInput.value.split(',').map(plate => plate.trim());
+        const startTimeValue = formatDateForBackend(startTimePicker.value);
+        const endTimeValue = formatDateForBackend(endTimePicker.value);
+        //const licensePlates = licensePlatesInput.value.split(',').map(plate => plate.trim());
+        const licensePlates = licensePlatesInput.value.trim();
 
         const params = {
-            startTime: startTimeValue,
-            endTime: endTimeValue,
-            carId: licensePlates
+            begin: startTimeValue,
+            end: endTimeValue,
+            car_id: licensePlates
         };
 
         axios.post('http://106.52.17.197:5000/vehicle_track', params)
@@ -102,6 +119,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 console.error('Error querying trajectories:', error);
             });
     });
+    function formatDateForBackend(dateString) {
+    const date = new Date(dateString);
+    return date.toISOString().slice(0, 19).replace('T', ' ');
+}
 
     goHomeButton.addEventListener("click", function () {
         window.location.href = '../static/index.html'; // Adjust the URL to your homepage
@@ -110,49 +131,52 @@ document.addEventListener("DOMContentLoaded", function () {
     function showTrajectories(flowData) {
         flowData.forEach(flow => animateFlow(flow));
     }
-
     function animateFlow(flow) {
-        let index = 0;
+            let index = 0;
 
-        function step() {
-            if (index >= flow.nodes.length - 1) {
-                setTimeout(() => {
-                    alert(`车牌号 ${flow.carId} 的轨迹呈现完毕`);
-                }, 5000);
-                return;
+            function step() {
+                if (index >= flow.nodes.length - 1) {
+                    setTimeout(() => {
+                        alert(`车牌号 ${flow.carId} 的轨迹呈现完毕`);
+                    }, 3000);
+                    return;
+                }
+
+                const sourceNode = data.nodes.find(n => n.id === flow.nodes[index]);
+                const targetNode = data.nodes.find(n => n.id === flow.nodes[index + 1]);
+
+                if (sourceNode && targetNode) {
+                    const path = svg.append("line")
+                        .attr("class", "flow-path")
+                        .attr("stroke", flow.color)
+                        .attr("x1", sourceNode.x)
+                        .attr("y1", sourceNode.y)
+                        .attr("x2", sourceNode.x)
+                        .attr("y2", sourceNode.y)
+                        .attr("marker-end", "url(#arrow)");
+
+                    paths.push({ path, source: sourceNode, target: targetNode });
+
+                    const label = svg.append("text")
+                        .attr("class", "label")
+                        .text(flow.carId);
+
+                    labels.push({ label, source: sourceNode, target: targetNode });
+
+                    path.transition()
+                        .duration(3000)
+                        .attr("x1", sourceNode.x)
+                        .attr("y1", sourceNode.y)
+                        .attr("x2", targetNode.x)
+                        .attr("y2", targetNode.y)
+                        .on("end", () => {
+                            index++;
+                            step();
+                        });
+                }
             }
 
-            const sourceNode = data.nodes.find(n => n.id === flow.nodes[index]);
-            const targetNode = data.nodes.find(n => n.id === flow.nodes[index + 1]);
-
-            if (sourceNode && targetNode) {
-                const path = svg.append("line")
-                    .attr("class", "flow-path")
-                    .attr("stroke", flow.color)
-                    .attr("marker-end", "url(#arrow)");
-
-                const label = svg.append("text")
-                    .attr("class", "label")
-                    .text(flow.carId);
-
-                path.transition()
-                    .duration(3000)
-                    .attrTween("x1", () => d3.interpolate(sourceNode.x, targetNode.x))
-                    .attrTween("y1", () => d3.interpolate(sourceNode.y, targetNode.y))
-                    .attrTween("x2", () => d3.interpolate(sourceNode.x, targetNode.x))
-                    .attrTween("y2", () => d3.interpolate(sourceNode.y, targetNode.y))
-                    .on("end", () => {
-                        index++;
-                        step();
-                    });
-
-                label.transition()
-                    .duration(3000)
-                    .attrTween("x", () => d3.interpolate(sourceNode.x, targetNode.x))
-                    .attrTween("y", () => d3.interpolate(sourceNode.y, targetNode.y));
-            }
+            step();
         }
 
-        step();
-    }
 });
