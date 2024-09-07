@@ -68,7 +68,8 @@ def getNodeData():
             links.append(links_[l])
         print("links:",links)
         return {"nodes":nodes,"links":links}
-    except:
+    except Exception as e:
+        print(e)
         return "false"
 
 @app.route("/vehicle_track", methods=["GET","POST"])
