@@ -137,7 +137,7 @@ document.addEventListener("DOMContentLoaded", function () {
             function step() {
                 if (index >= flow.nodes.length - 1) {
                     setTimeout(() => {
-                        alert(`车牌号 ${flow.carId} 的轨迹呈现完毕`);
+                        alert(`车牌号 ${flow.car_id} 的轨迹呈现完毕`);
                     }, 3000);
                     return;
                 }
@@ -159,7 +159,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                     const label = svg.append("text")
                         .attr("class", "label")
-                        .text(flow.carId);
+                        .text(flow.car_id);
 
                     labels.push({ label, source: sourceNode, target: targetNode });
 

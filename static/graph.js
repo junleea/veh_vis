@@ -49,15 +49,27 @@ document.addEventListener("DOMContentLoaded", function () {
         .force("charge", d3.forceManyBody().strength(-500))
         .force("center", d3.forceCenter(width / 2, height / 2));
 
-    const link = svg.append("g")
+    // const link = svg.append("g")
+    //     .attr("class", "links")
+    //     .selectAll("line")
+    //     .data(data.links)
+    //     .enter().append("line")
+    //     .attr("class", "link")
+    //     .on("click", function(event, d) {
+    //         showTrafficData(d);
+    //     });
+     const link = svg.append("g")
         .attr("class", "links")
         .selectAll("line")
         .data(data.links)
         .enter().append("line")
-        .attr("class", "link")
-        .on("click", function(event, d) {
-            showTrafficData(d);
-        });
+    .attr("class", "link")
+    .style("stroke-width", 10) // Increase for easier clicking
+   // .style("stroke", "transparent")
+    .on("click", function(event, d) {
+        showTrafficData(d);
+    });
+
 
     const node = svg.append("g")
         .attr("class", "nodes")
@@ -65,10 +77,15 @@ document.addEventListener("DOMContentLoaded", function () {
         .data(data.nodes)
         .enter().append("g")
         .attr("class", "node")
+        .on("click", function(event, d) {
+        // alert(`Node ${d.id} clicked!`);
+            showTrafficNode(d);
+    })
         .call(d3.drag()
             .on("start", dragstarted)
             .on("drag", dragged)
             .on("end", dragended));
+
 
     node.append("circle")
         .attr("r", 10);
@@ -92,6 +109,8 @@ document.addEventListener("DOMContentLoaded", function () {
         svg.selectAll(".traffic-label").remove();
 
     });
+
+
 
     function dragstarted(event, d) {
         if (!event.active) simulation.alphaTarget(0.3).restart();
@@ -129,17 +148,48 @@ function formatDateForBackend(dateString) {
                 streamData=response.data;
                 console.log('Traffic data:', response.data);
                 console.log('stream data:', streamData);
+                updateTrafficData();
             })
             .catch(error => {
                 console.error('Error sending link data:', error);
             });
     }
+    // 显示节点流量数据
+       async function showTrafficNode(node) {
+        const midX = node.x;
+        const midY = node.y;
+        if(streamData==null||formatDateForBackend(startTimePicker.value)!==streamData.time.startTime||formatDateForBackend(endTimePicker.value)!==streamData.time.endTime){
+            await sendLinkData()
+        }
+        console.log('node:',node);
+        //todo 在streamData中找到对应的流量数据，显示在label中
+           // Find the traffic data in streamData
+      const trafficNode = streamData.nodes.find(l => l.id === node.id);
+      const trafficData = trafficNode ? trafficNode.value : 0;
+      console.log('trafficNode:',trafficNode);
+      console.log('trafficData:',trafficData);
+      selectedStreamData.nodes.push(trafficNode);
+      alert(`Node ${node.id} 的流量为${trafficData} !`);
+
+        svg.append("text")
+            .attr("class", "traffic-label")
+            .attr("x", midX)
+            .attr("y", midY)
+            .attr("dy", 5)
+            .attr("text-anchor", "middle")
+            .style("fill", "black")
+            .style("background", "lightgray")
+            .style("padding", "2px")
+            .text(trafficData)
+            .attr("filter", "url(#bg)");
+
+       }
     // 显示节点间流量数据
       async function showTrafficData(link) {
         const midX = (link.source.x + link.target.x) / 2;
         const midY = (link.source.y + link.target.y) / 2;
 
-        if(streamData==null||formatDateForBackend(startTimePicker.value)!=streamData.time.startTime||formatDateForBackend(endTimePicker.value)!=streamData.time.endTime){
+        if(streamData==null||formatDateForBackend(startTimePicker.value)!==streamData.time.startTime||formatDateForBackend(endTimePicker.value)!==streamData.time.endTime){
             await sendLinkData()
         }
         //todo 在streamData中找到对应的流量数据，显示在label中
@@ -162,6 +212,24 @@ function formatDateForBackend(dateString) {
     }
     function updateTrafficData() {
     svg.selectAll(".traffic-label").remove(); // Clear existing labels
+        selectedStreamData.nodes.forEach(node => {
+            const nodeNow = data.nodes.find(n => n.id === node.id);
+            if (nodeNow) {
+                const midY = nodeNow.y;
+                const midX = nodeNow.x;
+                 svg.append("text")
+                .attr("class", "traffic-label")
+                .attr("x", midX)
+                .attr("y", midY)
+                .attr("dy", -5)
+                .attr("text-anchor", "middle")
+                .style("fill", "black")
+                .style("background", "lightgray")
+                .style("padding", "2px")
+                .text(node.value)
+                .attr("filter", "url(#bg)");
+            }
+        });
 
     selectedStreamData.links.forEach(link => {
         const sourceNode = data.nodes.find(node => node.id === link.source);
