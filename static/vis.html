@@ -384,20 +384,8 @@
 
 	<script type="text/javascript">
 		//根据不同的分辨率调用不同的css和js
-		if (window.screen.width >= 1600) {
 			document.write("<link href='css/test-1920.css' rel='stylesheet' type='text/css'>");
-
 			document.writeln("<script type=\"text/javascript\" src=\"js/test-1920.js\"><\/script>");
-		}
-		else if (window.screen.width < 1600 && window.screen.width >= 1280) {
-			document.write("<link href='css/test-1280.css' rel='stylesheet' type='text/css'>");
-
-			document.writeln("<script type=\"text/javascript\" src=\"js/test-1280.js\"><\/script>");
-		} else {
-			document.write("<link href='css/test-1024.css' rel='stylesheet' type='text/css'>");
-
-			document.writeln("<script type=\"text/javascript\" src=\"js/test-1024.js\"><\/script>");
-		}
 	</script>
 	<!--大屏-->
 	<script type="text/javascript">
