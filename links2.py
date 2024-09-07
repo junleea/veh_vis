@@ -27,7 +27,7 @@ def get_info_mysql(sql):
     return result
 
 def getCars():
-    sql="select CI_CarPlate,count(zakk_carinfo_202310.CI_CarPlate) as num from zakk_carinfo_202310 where  CI_ThroughTime < '2023-10-01 23:59:59' and CI_ThroughTime > '2023-10-01 00:00:00' group by CI_CarPlate order by num desc limit 50;"
+    sql="select CI_CarPlate,count(zakk_carinfo_202310.CI_CarPlate) as num from zakk_carinfo_202310 where  CI_ThroughTime < '2023-10-01 23:59:59' and CI_ThroughTime > '2023-10-01 00:00:00' group by CI_CarPlate order by num desc limit 30;"
     cars=[]
     list1 = get_info_mysql(sql)
     for row in list1:
@@ -66,16 +66,25 @@ def getLinks(cars):
             if tracks[i]["CI_AddressId"] == tracks[i-1]["CI_AddressId"]:
                 continue
             links.append({"source":tracks[i-1]["CI_AddressId"],"target":tracks[i]["CI_AddressId"],"time":(tracks[i]["CI_ThroughTime"]-tracks[i-1]["CI_ThroughTime"]).seconds})
-        break
     links2 = []
     for link in links:
-        if link["time"] < 300:
+        if link["time"] < 30:
             links2.append({"source":link["source"],"target":link["target"]})
     print("len1, len2=",len(links),len(links2))
     with open('links.json','w') as f:
         f.write(str(links))
     with open('links2.json','w') as f:
         f.write(str(links2))
+    s=set()
+    for link in links2:
+        s.add(link["source"])
+        s.add(link["target"])
+    print(len(s))
+    s1 = set()
+    d = [{'id': 'JHNC', 'value': 33301}, {'id': 'XZP', 'value': 26363}, {'id': 'QJZLCHDD', 'value': 22241}, {'id': 'QJLK', 'value': 20928}, {'id': '', 'value': 15538}, {'id': 'SZP', 'value': 13745}, {'id': 'HYZT', 'value': 9585}, {'id': 'ZHDD', 'value': 9429}, {'id': 'DYZX', 'value': 7060}, {'id': 'JNLK', 'value': 4163}, {'id': 'TPHC', 'value': 3856}, {'id': 'LYQ', 'value': 3379}, {'id': 'JYHC', 'value': 3129}, {'id': 'HYJS', 'value': 2611}, {'id': 'TPZT', 'value': 2551}, {'id': 'YJQ', 'value': 2103}, {'id': 'DZP', 'value': 1995}, {'id': 'BJZT', 'value': 202}, {'id': 'BJQJ', 'value': 150}, {'id': 'SHUXIYILU', 'value': 92}]
+    for d1 in d:
+        s1.add(d1["id"])
+    print(s1-s)
 
 def getNodesCount():
     sql="select CI_AddressId as name,count(CI_AddressId) as value from zakk_carinfo_202310 group by CI_AddressId order by value desc ;"
@@ -139,8 +148,9 @@ def getAddressAllCount():
 
 if __name__ == "__main__":
     getAddressAllCount()
-    # cars=getCars()
-    # getLinks(cars)
+    cars=getCars()
+    getLinks(cars)
+    
     #print(getNode())
     # end =getNodesCount()
     # print(end)
@@ -161,40 +171,40 @@ if __name__ == "__main__":
     #         end.append({"count":row["num"]}) 
     # print(e)
     # print(end)
-    l= getCarPlateData('XZP')
-    x=[]
-    y=[]
+    # l= getCarPlateData('XZP')
+    # x=[]
+    # y=[]
 
-    i=0
-    for l1 in l :
-        i+=1
-        x.append(l1["name"])
-        y.append(l1["value"])
-        if i>20:
-            break
-    print(x)
-    print(y)
+    # i=0
+    # for l1 in l :
+    #     i+=1
+    #     x.append(l1["name"])
+    #     y.append(l1["value"])
+    #     if i>20:
+    #         break
+    # print(x)
+    # print(y)
 
     # ll=getCarThroughTimeLatest()
     # for l2 in ll:
     #     e="<li>"+"<div>"+l2["CI_CarPlate"]+"</div>"+"<div>"+l2["CI_AddressId"]+"</div>"+"<div>"+str(l2["CI_ThroughTime"])+"</div>" +"</li>"
     #     print(e)
     
-    j=[]
-    xZP=[]
-    qJZLCHDD=[]
-    res = getAddressByDay()
-    for row in res:
-        if row["CI_AddressId"] == "XZP":
-            xZP.append({"count":row["num"]})
-        if row["CI_AddressId"] == "QJZLCHDD":
-            qJZLCHDD.append({"count":row["num"]})
-        if row["CI_AddressId"] == "JHNC":
-            j.append({"count":row["num"]})
+    # j=[]
+    # xZP=[]
+    # qJZLCHDD=[]
+    # res = getAddressByDay()
+    # for row in res:
+    #     if row["CI_AddressId"] == "XZP":
+    #         xZP.append({"count":row["num"]})
+    #     if row["CI_AddressId"] == "QJZLCHDD":
+    #         qJZLCHDD.append({"count":row["num"]})
+    #     if row["CI_AddressId"] == "JHNC":
+    #         j.append({"count":row["num"]})
     
-    print(j)
-    print(xZP)
-    print(qJZLCHDD)
+    # print(j)
+    # print(xZP)
+    # print(qJZLCHDD)
 
 
 
